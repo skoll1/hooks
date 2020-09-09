@@ -19,7 +19,7 @@ const MessageBox: FC<{
       <button
         type="button"
         onClick={() => {
-          props.focus$.emit();
+          props.focus$.emit({name:"ahooks"});
         }}
       >
         Reply
@@ -32,8 +32,9 @@ const InputBox: FC<{
   focus$: EventEmitter<void>;
 }> = function (props) {
   const inputRef = useRef<any>();
-  props.focus$.useSubscription(() => {
+  props.focus$.useSubscription((value) => {
     inputRef.current.focus();
+    console.log(value)
   });
   return (
     <input ref={inputRef} placeholder="Enter reply" style={{ width: '100%', padding: '4px' }} />
